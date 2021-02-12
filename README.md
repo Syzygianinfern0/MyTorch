@@ -10,6 +10,20 @@
 
 </div>
 
+# Installation 👨‍💻
+I have not included any dependencies in the `setup.py` nor a `requirements.txt` as I leave the hassle of setting up GPU support for torch on your own. It should work on `torch>=1.4` and `CUDA>=10.0` but I frankly have no clue. I use `torch==1.7.1` and `CUDA` Version of `11.2`
+
+To install it, just do
+```shell
+pip install git+https://github.com/Syzygianinfern0/MyTorch.git
+```
+
+Its also available on PyPi, but I wouldn't be very keen on maintaining it. 
+
+```shell
+pip install python-mytorch==0.1
+```
+
 # Documentation 📑
 
 ## [`mytorch.ops`](https://github.com/Syzygianinfern0/MyTorch/tree/main/mytorch)
