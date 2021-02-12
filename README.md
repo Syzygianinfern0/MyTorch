@@ -8,6 +8,8 @@
 
 ---
 
+</div>
+
 # Documentation
 
 ## [`mytorch.ops`](https://github.com/Syzygianinfern0/MyTorch/tree/main/mytorch)
