@@ -2,10 +2,13 @@
 # https://github.com/szagoruyko/pyinn/blob/master/pyinn/im2col.py
 
 
-from torch.autograd import Function
+from collections import namedtuple
+from string import Template
+
+import cupy
 import torch
+from torch.autograd import Function
 from torch.nn.modules.utils import _pair
-from pyinn.utils import Dtype, Stream, load_kernel
 
 CUDA_NUM_THREADS = 1024
 
@@ -48,7 +51,6 @@ __global__ void im2col_kernel(const ${Dtype}* data_im, ${Dtype}* data_col) {
 }
 """
 
-
 _col2im_kernel = """
 #define CUDA_KERNEL_LOOP(i, n)                        \
   for (int i = blockIdx.x * blockDim.x + threadIdx.x; \
@@ -82,6 +84,22 @@ __global__ void col2im_kernel(const ${Dtype}* data_col, ${Dtype}* data_im) {
   }
 }
 """
+
+Stream = namedtuple("Stream", ["ptr"])
+
+
+def Dtype(t):
+    if isinstance(t, torch.cuda.FloatTensor):
+        return "float"
+    elif isinstance(t, torch.cuda.DoubleTensor):
+        return "double"
+
+
+@cupy.util.memoize(for_each_device=True)
+def load_kernel(kernel_name, code, **kwargs):
+    code = Template(code).substitute(**kwargs)
+    kernel_code = cupy.cuda.compile_with_cache(code)
+    return kernel_code.get_function(kernel_name)
 
 
 def im2col_shape(size, kernel_size, stride, padding):
