@@ -1,6 +1,6 @@
 <div align="center">
 
-# MyTorch
+# 🔥 MyTorch 🔥
 🐣 A Library extending PyTorch for Personal Needs backed by C++/CUDA APIs 
 
 | **🚧 WIP Forever 🚧** |
@@ -10,7 +10,7 @@
 
 </div>
 
-# Documentation
+# Documentation 📑
 
 ## [`mytorch.ops`](https://github.com/Syzygianinfern0/MyTorch/tree/main/mytorch)
 
