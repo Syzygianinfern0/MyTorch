@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="python-mytorch",
-    version="0.1.1",
+    version="0.1.2",
     url="https://github.com/Syzygianinfern0/MyTorch.git",
     author="S P Sharan",
     author_email="spsharan2000@gmail.com",
