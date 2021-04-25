@@ -95,7 +95,7 @@ def Dtype(t):
         return "double"
 
 
-@cupy.util.memoize(for_each_device=True)
+@cupy.memoize(for_each_device=True)
 def load_kernel(kernel_name, code, **kwargs):
     code = Template(code).substitute(**kwargs)
     kernel_code = cupy.cuda.compile_with_cache(code)
