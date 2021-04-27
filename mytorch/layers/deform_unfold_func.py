@@ -1,14 +1,18 @@
+import os
+
 import torch
 from torch.autograd import Function
 from torch.nn.modules.utils import _pair
 from torch.utils.cpp_extension import load
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 deform_modules_cuda = load(
     name="deform_modules_cuda",
     sources=[
-        "cu_libs/deform_modules.cpp",
-        "cu_libs/deform_modules_cuda.cu",
-        "cu_libs/deform_modules_kernel_cuda.cu",
+        f"{dir_path}/cu_libs/deform_modules.cpp",
+        f"{dir_path}/cu_libs/deform_modules_cuda.cu",
+        f"{dir_path}/cu_libs/deform_modules_kernel_cuda.cu",
     ],
 )
 
