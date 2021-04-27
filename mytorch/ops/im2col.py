@@ -222,9 +222,7 @@ def im2col_batch(input, kernel_size, stride, padding):
     if input.dim() == 3:
         return _im2col(input, kernel_size, stride, padding)
     elif input.dim() == 4:
-        shape = (input.size(0),) + im2col_shape(
-            input.size()[1:], kernel_size, stride, padding
-        )
+        shape = (input.size(0),) + im2col_shape(input.size()[1:], kernel_size, stride, padding)
         out = input.new(*shape)
         for x, o in zip(input, out):
             _im2col(x, kernel_size, stride, padding, out=o)
@@ -233,13 +231,9 @@ def im2col_batch(input, kernel_size, stride, padding):
 
 def col2im_batch(grad_output, kernel_size, stride, padding, input_size=None):
     if grad_output.dim() == 5:
-        return _col2im(
-            grad_output, kernel_size, stride, padding, out=None, input_size=input_size
-        )
+        return _col2im(grad_output, kernel_size, stride, padding, out=None, input_size=input_size)
     elif grad_output.dim() == 6:
-        shape = (grad_output.size(0),) + col2im_shape(
-            grad_output.size()[1:], kernel_size, stride, padding, input_size
-        )
+        shape = (grad_output.size(0),) + col2im_shape(grad_output.size()[1:], kernel_size, stride, padding, input_size)
         grad_input = grad_output.new(*shape)
         for go, gx in zip(grad_output, grad_input):
             _col2im(go, kernel_size, stride, padding, out=gx, input_size=input_size)

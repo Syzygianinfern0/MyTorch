@@ -18,7 +18,7 @@ deform_modules_cuda = load(
 class DeformConvFunction(Function):
     @staticmethod
     def forward(
-            ctx, input, offset, weight, stride=1, padding=0, dilation=1, groups=1, deformable_groups=1, im2col_step=64
+        ctx, input, offset, weight, stride=1, padding=0, dilation=1, groups=1, deformable_groups=1, im2col_step=64
     ):
         if input is not None and input.dim() != 4:
             raise ValueError("Expected 4D tensor as input, got {}D tensor instead.".format(input.dim()))
